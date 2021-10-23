@@ -16,9 +16,23 @@
         <ul>
     
             <li><a href="resurse">Resurse</a></li>
-            <li><a  href="catalog">Catalog</a></li>
+            <li><a  href="main">Catalog</a></li>
+            <li><a href="statistici">Statistici</a></li>
             <li><a href="mesagerie">Mesagerie</a></li>
-            
+            <li style="float:right; ">
+                <div class="wrapperSelect">
+                    <input type="radio" name="select" id="option-1" checked>
+                    <input type="radio" name="select" id="option-2" onclick="location.replace(window.location.href.replace('note','absente'));">
+                    <label for="option-1" class="option option-1">
+                        <div class="dot"></div>
+                        <span>Note</span>
+                    </label>
+                    <label for="option-2" class="option option-2">
+                        <div class="dot"></div>
+                        <span>Absente</span>
+                    </label>
+                </div>
+            </li>
             
         </ul>
         </div>
@@ -35,15 +49,30 @@
                   <% for(var i=0;i<materii.length;i++) {%>
                       <tr>
                           <td><%=materii[i] %></td>
-                          <td>- <button style="float:right;" type="button" class="btn btn-success" onclick="adaugareNota()">Adauga</button></td>
-                          <td>- <button style="float:right;" type="button" class="btn btn-danger" onclick="adaugareNota()" >Incheie</button></td>
+                          <td id="tdNota-<%=materii[i]%>">~</td>
+                          <td class="afisareMedie" id="tdMedie-<%=materii[i]%>">~</td>
                       </tr>
-                      <tr class="separator" />
+                      <tr class="separator" >
+                      <div></div>
                   <% } %>
 
             </table>
         </div>
-      
-       
+        <div id="body" data-server-scope="<%=JSON_RESULT%>"></div>
+       <script>
+           
+           var noteData = JSON.parse(document.getElementById("body").getAttribute("data-server-scope"));
+           noteData.forEach(element => {
+               var objClasa = document.getElementById("tdNota-"+element.materie);
+               if(objClasa.innerHTML=="~"){
+                   objClasa.innerHTML = element.nota;
+               }else{
+                   objClasa.innerHTML = objClasa.innerHTML + "," + element.nota;
+               }
+           });
+           
+
+
+       </script>
     </body>
 </html>
