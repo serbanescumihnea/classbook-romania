@@ -50,7 +50,7 @@
 ## About the project
 <img src="https://i.imgur.com/CAeOym7.png">
 
-### A fully working classbook with a real-time marking/absence system. See <a href="usage">usage</a>
+### A fully working classbook with a real-time marking/absence system. See <a href="#usage">usage</a>
 
 ## Built With
 
