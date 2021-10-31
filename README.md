@@ -14,7 +14,7 @@
   </p>
 </div>
 
-
+<details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
@@ -36,13 +36,16 @@
         <li><a href="#student-local-statistics-page">Student's local statistics page</a></li>
       </ul>
     </li>
+   <li>
+      <a href="#in-progress">In progress</a>
+    </li>
     <li>
       <a href="#copyright">Copyright</a>
     </li>
+   
     
   </ol>
-
-
+</details>
 
 ## About the project
 <img src="https://i.imgur.com/CAeOym7.png">
@@ -99,6 +102,8 @@ Teachers are able to select a classroom and a student.
 <img src="https://i.imgur.com/1f1NOKk.png">
 <b> Student's accounts are only able to see their statistics </b>
 
+# IN PROGRESS
+<b> Code documentation <b>
 
 # Copyright
 <b> Copyright © 2021 Serbanescu Mihnea. All Rights Reserved. </b>
