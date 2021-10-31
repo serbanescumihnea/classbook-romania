@@ -1,12 +1,12 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width">
-    <meta charset="utf-8">
-    <title>Pagina Principala | Elena Cuza</title>
-    <link rel="stylesheet" href="main.teacher.css">
-    <!-- JavaScript Bundle with Popper -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width">
+  <meta charset="utf-8">
+  <title>Pagina Principala | Elena Cuza</title>
+  <link rel="stylesheet" href="main.teacher.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
 
 
 </head>
@@ -14,32 +14,32 @@
 <body>
 
 
-    <div class="nav">
-        <ul>
-
-            <li><a href="resurse">Resurse</a></li>
-            <li><a href="main-teacher">Catalog</a></li>
-            <li><a href="statistici">Statistici</a></li>
-            <li><a href="mesagerie">Mesagerie</a></li>
+  <div class="nav">
+    <ul>
 
 
-        </ul>
+      <li><a href="main-teacher">Catalog</a></li>
+      <li><a href="statistici">Statistici</a></li>
+
+
+
+    </ul>
+  </div>
+
+  <br>
+  <div class="wrapper">
+
+
+    <div class="grid-container">
+      <% for(var i=0;i<result.length;i++) { %>
+      <div class="grid-item" onclick="location.href='/view?class=<%=clasa %>&&id=<%=result[i] %>&&mode=note'">
+        <h4>
+          <%=result[i] %>
+        </h4>
+      </div>
+      <% } %>
     </div>
-
-    <br>
-    <div class="wrapper">
-
-
-        <div class="grid-container">
-            <% for(var i=0;i<result.length;i++) { %>
-                <div class="grid-item" onclick="location.href='/view?class=<%=clasa %>&&id=<%=result[i] %>&&mode=note'">
-                    <h4>
-                        <%=result[i] %>
-                    </h4>
-                </div>
-                <% } %>
-        </div>
-    </div>
+  </div>
 
 </body>
 

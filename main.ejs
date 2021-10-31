@@ -1,78 +1,76 @@
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <title>Pagina Principala | Elena Cuza</title>
-        <link rel="stylesheet" href="main.css">
-        <!-- JavaScript Bundle with Popper -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="main.js"></script>
-    </head>
+<head>
+  <meta charset="utf-8">
+  <title>Pagina Principala | Elena Cuza</title>
+  <link rel="stylesheet" href="main.css">
 
-    <body> <div class="wrapper">
-       
-        <div class="nav">
-        <ul>
-    
-            <li><a href="resurse">Resurse</a></li>
-            <li><a  href="main">Catalog</a></li>
-            <li><a href="statistici">Statistici</a></li>
-            <li><a href="mesagerie">Mesagerie</a></li>
-            <li style="float:right; ">
-                <div class="wrapperSelect">
-                    <input type="radio" name="select" id="option-1" checked>
-                    <input type="radio" name="select" id="option-2" onclick="location.replace(window.location.href.replace('note','absente'));">
-                    <label for="option-1" class="option option-1">
-                        <div class="dot"></div>
-                        <span>Note</span>
-                    </label>
-                    <label for="option-2" class="option option-2">
-                        <div class="dot"></div>
-                        <span>Absente</span>
-                    </label>
-                </div>
-            </li>
-            
-        </ul>
-        </div>
-        <br>
-        <div class="tabel">
-            <table class="table table-bordered">
-                <tr>
-                    <th>Materie</th>
-                    <th>Note</th>
-                    <th>Medie</th>
-                  </tr>
-                  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="main.js"></script>
+</head>
 
-                  <% for(var i=0;i<materii.length;i++) {%>
-                      <tr>
-                          <td><%=materii[i] %></td>
-                          <td id="tdNota-<%=materii[i]%>">~</td>
-                          <td class="afisareMedie" id="tdMedie-<%=materii[i]%>">~</td>
-                      </tr>
-                      <tr class="separator" >
-                      <div></div>
-                  <% } %>
+<body>
+  <div class="wrapper">
 
-            </table>
-        </div>
-        <div id="body" data-server-scope="<%=JSON_RESULT%>"></div>
-       <script>
-           
-           var noteData = JSON.parse(document.getElementById("body").getAttribute("data-server-scope"));
-           noteData.forEach(element => {
-               var objClasa = document.getElementById("tdNota-"+element.materie);
-               if(objClasa.innerHTML=="~"){
-                   objClasa.innerHTML = element.nota;
-               }else{
-                   objClasa.innerHTML = objClasa.innerHTML + "," + element.nota;
-               }
-           });
-           
+    <div class="nav">
+      <ul>
 
 
-       </script>
-    </body>
+        <li><a href="main?mode=note">Catalog</a></li>
+        <li><a href="statistici">Statistici</a></li>
+
+        <li style="float:right; ">
+          <div class="wrapperSelect">
+            <input type="radio" name="select" id="option-1" checked>
+            <input type="radio" name="select" id="option-2" onclick="location.replace(window.location.href.replace('note','absente'));">
+            <label for="option-1" class="option option-1">
+              <div class="dot"></div>
+              <span>Note</span>
+            </label>
+            <label for="option-2" class="option option-2">
+              <div class="dot"></div>
+              <span>Absente</span>
+            </label>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+    <br>
+    <div class="tabel">
+      <table class="table table-bordered">
+        <tr>
+          <th>Materie</th>
+          <th>Note</th>
+          <th>Medie</th>
+        </tr>
+
+
+        <% for(var i=0;i<materii.length;i++) {%>
+        <tr>
+          <td><%=materii[i] %></td>
+          <td id="tdNota-<%=materii[i]%>">~</td>
+          <td class="afisareMedie" id="tdMedie-<%=materii[i]%>">~</td>
+        </tr>
+        <tr class="separator">
+          <div></div>
+          <% } %>
+
+      </table>
+    </div>
+    <div id="body" data-server-scope="<%=JSON_RESULT%>"></div>
+    <script>
+      var noteData = JSON.parse(document.getElementById("body").getAttribute("data-server-scope"));
+      noteData.forEach(element => {
+        var objClasa = document.getElementById("tdNota-" + element.materie);
+        if (objClasa.innerHTML == "~") {
+          objClasa.innerHTML = element.nota;
+        } else {
+          objClasa.innerHTML = objClasa.innerHTML + "," + element.nota;
+        }
+      });
+    </script>
+</body>
+
 </html>

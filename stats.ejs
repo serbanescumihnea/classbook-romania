@@ -1,78 +1,82 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    <title>Pagina Principala | Elena Cuza</title>
-    <link rel="stylesheet" href="stats.css">
-    <!-- JavaScript Bundle with Popper -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="stats.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <title>Pagina Principala | Elena Cuza</title>
+  <link rel="stylesheet" href="stats.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="stats.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 </head>
 
 <body>
 
-    <div class="nav">
-        <ul>
+  <div class="nav">
+    <ul>
 
-            <li><a href="resurse">Resurse</a></li>
-            <li><a href="../">Catalog</a></li>
-            <li><a href="statistici">Statistici</a></li>
-            <li><a href="mesagerie">Mesagerie</a></li>
-
-
-        </ul>
-    </div>
-    <div class="options">
-        <select onchange="schimbareClasa()" style="width:30%; text-align: center;" id="clasa" name="clasa">
-            <option style="text-align: center;color: white;" value="" disabled selected>Selecteaza o clasa...</option>
-        </select>
-        <div id="spacer" style="width: 5px;"></div>
-        <select onchange="schimbareElev()" style="width: 30%;text-align: center;" id="elev" name="elev">
-            <option style="text-align: center;" value="all">Toti elevii</option>
-            <% for(var i=0;i<elevi.length;i++) { %>
-                <option style="text-align: center;" value="<%=elevi[i]%>">
-                    <%=elevi[i]%>
-                </option>
-                <% } %>
-
-        </select>
-    </div>
-    <br>
-    <div id="chart1">
-        <p>Media notelor obtinute</p>
-        <canvas width="1000" height="1000" id="line-chart"></canvas>
-    </div>
-    <div id="spacer"><br></div>
-    <div id="chart2">
-        <p>Absente obtinute</p>
-        <canvas width="1000" height="1000" id="line-chart-absente"></canvas>
-    </div>
+      <li><a href="/main?mode=note">Catalog</a></li>
+      <li><a href="statistici">Statistici</a></li>
 
 
 
+    </ul>
+  </div>
+  <div class="options">
+    <select onchange="schimbareClasa()" style="width:30%; text-align: center;" id="clasa" name="clasa">
+      <option style="text-align: center;color: white;" value="" disabled selected>Selecteaza o clasa...</option>
+    </select>
+    <div id="spacer" style="width: 5px;"></div>
+    <select onchange="schimbareElev()" style="width: 30%;text-align: center;" id="elev" name="elev">
+      <% if(elevi.length>1){%>
+      <option style="text-align: center;" value="all">Toti elevii</option>
+      <% } %>
+      <% for(var i=0;i<elevi.length;i++) { %>
+      <option style="text-align: center;" value="<%=elevi[i]%>">
+        <%=elevi[i]%>
+      </option>
+      <% } %>
 
-    <div id="body" data-server-scope="<%=JSON_RESULT%>"></div>
-    <% if(JSON_RESULT_NOTE!=null){ %>
-        <div id="body2" data-server-scope="<%=JSON_RESULT_NOTE%>"></div>
-        <% } %>
-            <% if(JSON_RESULT_NOTE!=null){ %>
-                <div id="body3" data-server-scope="<%=JSON_RESULT_ABSENTE%>"></div>
-                <% } %>
-                    <script>
+    </select>
+  </div>
+  <br>
+  <div id="chart1">
+    <p>Media notelor obtinute</p>
+    <canvas width="1000" height="1000" id="line-chart"></canvas>
+  </div>
+  <div id="spacer"><br></div>
+  <div id="chart2">
+    <p>Absente obtinute</p>
+    <canvas width="1000" height="1000" id="line-chart-absente"></canvas>
+  </div>
 
-                        var claseData = JSON.parse(document.getElementById("body").getAttribute("data-server-scope"));
 
-                        var selectObj = document.getElementById("clasa");
-                        claseData.forEach(element => {
-                            var optiuneGenerata = document.createElement('option');
-                            optiuneGenerata.value = element.nume;
-                            optiuneGenerata.style = "text-align:center;";
-                            optiuneGenerata.innerHTML = element.nume + " - " + element.diriginte;
-                            selectObj.appendChild(optiuneGenerata);
-                        });
 
-                    </script>
+  <% if(JSON_RESULT!=null){%>
+  <div id="body" data-server-scope="<%=JSON_RESULT%>"></div>
+  <% } %>
+  <% if(JSON_RESULT_NOTE!=null){ %>
+  <div id="body2" data-server-scope="<%=JSON_RESULT_NOTE%>"></div>
+  <% } %>
+  <% if(JSON_RESULT_NOTE!=null){ %>
+  <div id="body3" data-server-scope="<%=JSON_RESULT_ABSENTE%>"></div>
+  <% } %>
+  <script>
+    if (document.getElementById("body")) {
+      var claseData = JSON.parse(document.getElementById("body").getAttribute("data-server-scope"));
+
+      var selectObj = document.getElementById("clasa");
+      claseData.forEach(element => {
+        var optiuneGenerata = document.createElement('option');
+        optiuneGenerata.value = element.nume;
+        optiuneGenerata.style = "text-align:center;";
+        optiuneGenerata.innerHTML = element.nume + " - " + element.diriginte;
+        selectObj.appendChild(optiuneGenerata);
+      });
+    } else {
+      document.getElementById("clasa").remove();
+    }
+  </script>
 </body>

@@ -1,6 +1,3 @@
-
-
-
 function schimbareClasa() {
   var objClasa = document.getElementById('clasa').value;
 
@@ -28,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   var searchParams = new URLSearchParams(window.location.search);
+  if(document.getElementById("body")){
   if (searchParams.get("clasa") == null) {
     document.getElementById("chart1").style.visibility = "hidden";
     document.getElementById("chart2").style.visibility = "hidden";
@@ -35,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("chart1").style.visibility = "visible";
     document.getElementById("chart2").style.visibility = "visible";
   }
+}
+  if(searchParams.get["clasa"]!="" && searchParams.get("elev")!=""){
   var clasa_curenta = searchParams.get("clasa");
   if (clasa_curenta) {
     document.getElementById('clasa').value = clasa_curenta;
@@ -44,20 +44,22 @@ document.addEventListener('DOMContentLoaded', () => {
   if (elev_curent) {
     document.getElementById('elev').value = elev_curent;
   }
+}
 
   if (document.getElementById("body2")) {
     var note = JSON.parse(document.getElementById("body2").getAttribute("data-server-scope"));
-    note.sort(function (a, b) {
+    note.sort(function(a, b) {
       return new Date(a.data) - new Date(b.data);
     });
-    console.log(note);
 
 
 
-    // CHART NOTE
+
+
 
     var months = ["January", "February", "March", "April", "May", "June",
-      "July", "August", "September", "October", "November", "December"];
+      "July", "August", "September", "October", "November", "December"
+    ];
 
     var date = []
     var medii = []
@@ -74,41 +76,36 @@ document.addEventListener('DOMContentLoaded', () => {
           medii.push(parseFloat(suma / count));
           suma = 0 + parseInt(note[i].nota);
           count = 1;
-          console.log(dataObjLocal.getMonth() + 1);
-        }else  if (luna == null) {
+
+        } else if (luna == null) {
           suma = suma + parseInt(note[i].nota);
           count++;
-          console.log(dataObjLocal.getMonth() + 1);
-          //console.log(note[i].nota);
+
         }
       } else {
         suma = suma + parseInt(note[i].nota);
         count++;
-       console.log(dataObjLocal.getMonth() + 1);
-        //console.log(note[i].nota);
+
       }
       luna = dataObjLocal.getMonth() + 1;
     }
     medii.push(parseFloat(suma / count));
-    console.log(date);
-    console.log(medii);
-    // CHARTS
+
+
 
     var dateLabel = date;
     var lineChartData = {
       labels: dateLabel,
-      datasets: [
-        {
-          borderColor: "green",
-          fill: false,
-          borderWidth: 3,
-          pointBorderWidth: 7,
-          pointHitRadius: 7,
-          pointHoverBorderWidth: 7,
-          pointRadius: 1,
-          data: medii
-        }
-      ]
+      datasets: [{
+        borderColor: "green",
+        fill: false,
+        borderWidth: 3,
+        pointBorderWidth: 7,
+        pointHitRadius: 7,
+        pointHoverBorderWidth: 7,
+        pointRadius: 1,
+        data: medii
+      }]
     }
 
 
@@ -129,8 +126,12 @@ document.addEventListener('DOMContentLoaded', () => {
         responsive: true,
 
 
-        legend: { display: false },
-        tooltips: { enabled: true },
+        legend: {
+          display: false
+        },
+        tooltips: {
+          enabled: true
+        },
 
 
       }
@@ -139,15 +140,15 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
 
-  // CHART ABSENTE !!!!!!!!!!! IMPORTANT !!!!!!!!!!!!!!
+  
   if (document.getElementById("body3")) {
     var absente = JSON.parse(document.getElementById("body3").getAttribute("data-server-scope"));
   }
-  absente.sort(function (a, b) {
+  absente.sort(function(a, b) {
     return new Date(a.data) - new Date(b.data);
   });
 
-  console.log(absente)
+
   var count_absente = 0;
   var medii_absente = [];
   var date_absente = [];
@@ -161,14 +162,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (luna != null) {
         medii_absente.push(count_absente);
         count_absente = 1;
-        console.log(dataObjLocal.getMonth() + 1);
-      } if (luna == null) {
+
+      }
+      if (luna == null) {
         count_absente++;
-        console.log(dataObjLocal.getMonth() + 1);
+
       }
     } else {
       count_absente++;
-      console.log(dataObjLocal.getMonth() + 1);
+
 
     }
     luna = dataObjLocal.getMonth() + 1;
@@ -177,22 +179,19 @@ document.addEventListener('DOMContentLoaded', () => {
   count_absente = 0;
 
   var dateLabelAbsente = date_absente;
-  console.log(dateLabelAbsente);
-  console.log(medii_absente);
+
   var lineChartDataAbsente = {
     labels: dateLabelAbsente,
-    datasets: [
-      {
-        borderColor: "red",
-        fill: false,
-        borderWidth: 3,
-        pointBorderWidth: 7,
-        pointHitRadius: 7,
-        pointHoverBorderWidth: 7,
-        pointRadius: 1,
-        data: medii_absente
-      }
-    ]
+    datasets: [{
+      borderColor: "red",
+      fill: false,
+      borderWidth: 3,
+      pointBorderWidth: 7,
+      pointHitRadius: 7,
+      pointHoverBorderWidth: 7,
+      pointRadius: 1,
+      data: medii_absente
+    }]
   }
 
 
@@ -213,8 +212,12 @@ document.addEventListener('DOMContentLoaded', () => {
       responsive: true,
 
 
-      legend: { display: false },
-      tooltips: { enabled: true },
+      legend: {
+        display: false
+      },
+      tooltips: {
+        enabled: true
+      },
 
     }
   })
@@ -224,7 +227,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
-
-
-
-
